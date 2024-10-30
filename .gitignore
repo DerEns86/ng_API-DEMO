@@ -6,6 +6,8 @@
 /out-tsc
 /bazel-out
 
+ToTry.md
+
 src/environments/*
 # Node
 /node_modules
