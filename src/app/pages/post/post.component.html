@@ -1,0 +1,56 @@
+<h3>Post Blog</h3>
+
+@if (posts$ | async; as posts) {
+  @for (post of posts; track post.id) {
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="card-text">{{ post.body }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <div>
+                @for (tag of post.tags; track $index) {
+                  <span class="badge bg-secondary me-md-2">{{ tag }}</span>
+                }
+              </div>
+              <div class="d-flex gap-2">
+                <div>
+                  <i
+                    class="bi bi-hand-thumbs-up-fill"
+                    style="color: lightgreen"
+                  ></i
+                  >{{ post.reactions.likes }}
+                </div>
+                <div>
+                  <i
+                    class="bi bi-hand-thumbs-down-fill"
+                    style="color: lightcoral"
+                  ></i
+                  >{{ post.reactions.dislikes }}
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+              <button
+                (click)="deletePost(post.id)"
+                class="btn btn-danger btn-sm btn-block"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  <!-- <button (click)="log(posts)">log</button> -->
+}
+
+<i
+  class="bi bi-plus-circle-fill text-primary add-button"
+  style="font-size: 3rem"
+  (click)="onAddPost()"
+></i>
