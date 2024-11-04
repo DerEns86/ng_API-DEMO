@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, map } from 'rxjs';
 import { Post } from '../models/post.interface';
 
 @Injectable({
@@ -40,5 +40,26 @@ export class PostService {
         .filter((post) => post.id !== id);
       this.postSubject.next(posts);
     });
+  }
+
+  updatePost(post: Post) {
+    this.http
+      .put<Post>(this.BASE_URL + '/' + post.id, post, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .subscribe({
+        next: (updatedPost: Post) => {
+          const posts = this.postSubject.getValue();
+          const index = posts.findIndex((p) => p.id === post.id);
+          if (index !== -1) {
+            posts[index] = updatedPost;
+            this.postSubject.next(posts);
+          }
+        },
+        error: () => {
+          console.warn("Error! Own posts can't be updated ");
+        },
+      });
+    console.log('Post ' + post.id + ' updated');
   }
 }

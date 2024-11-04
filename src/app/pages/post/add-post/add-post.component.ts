@@ -40,6 +40,7 @@ export class AddPostComponent {
         reactions: { likes: 0, dislikes: 0 },
         views: 0,
         tags: tagsArray,
+        id: new Date().getTime(),
       });
       this.router.navigateByUrl('/post');
     }

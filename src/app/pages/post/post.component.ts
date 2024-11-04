@@ -34,4 +34,15 @@ export class PostComponent implements OnInit {
   log(posts: any) {
     console.log(posts);
   }
+
+  handleReactions(post: Post, reaction: 'like' | 'dislike') {
+    const updateReaction = { ...post.reactions };
+    if (reaction === 'dislike' && updateReaction.dislikes > 0) {
+      updateReaction.dislikes -= 1;
+    } else if (reaction === 'like') {
+      updateReaction.likes += 1;
+    }
+    const updatedPost = { ...post, reactions: updateReaction };
+    this.postService.updatePost(updatedPost);
+  }
 }
