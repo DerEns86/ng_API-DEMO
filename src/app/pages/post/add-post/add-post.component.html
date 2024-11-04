@@ -1,0 +1,43 @@
+<p>Add new Post</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                formControlName="title"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="body" class="form-label">Body</label>
+              <textarea
+                class="form-control"
+                id="body"
+                formControlName="body"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="tags" class="form-label">Tags</label>
+              <input
+                type="text"
+                class="form-control"
+                id="tags"
+                formControlName="tags"
+                placeholder="Tags getrennt durch ein ,"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

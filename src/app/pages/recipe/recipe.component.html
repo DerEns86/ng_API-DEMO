@@ -1,0 +1,52 @@
+<section>
+  <div class="container mt-3 text-center">
+    <h3>Recipes</h3>
+    <p class="text-muted">
+      Hier wird die asny Pipe genutzt. Keine manuellen subscribtions
+    </p>
+  </div>
+
+  @if (recipe$ | async; as recipes) {
+    <div class="container">
+      <div class="row">
+        @for (recipe of recipes; track recipe.id) {
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card">
+              <img
+                src="{{ recipe.image }}"
+                class="card-img-top"
+                alt="{{ recipe.name }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ recipe.name }}</h5>
+                <p class="card-text">{{ recipe.description }}</p>
+                <p class="card-text">
+                  <strong>Prep Time:</strong> {{ recipe.prepTimeMinutes }} min
+                </p>
+                <p class="card-text">
+                  <strong>Cook Time:</strong> {{ recipe.cookTimeMinutes }} min
+                </p>
+                <p class="card-text">
+                  <strong>Servings:</strong> {{ recipe.servings }}
+                </p>
+                <p class="card-text">
+                  <strong>Difficulty:</strong> {{ recipe.difficulty }}
+                </p>
+                <p class="card-text">
+                  <strong>Cuisine:</strong> {{ recipe.cuisine }}
+                </p>
+                <p class="card-text">
+                  <strong>Calories per Serving:</strong>
+                  {{ recipe.caloriesPerServing }}
+                </p>
+                <p class="card-text">
+                  <strong>Tags:</strong> {{ recipe.tags.join(", ") }}
+                </p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</section>

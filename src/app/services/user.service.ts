@@ -1,13 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
-import { GithubUser } from "../models/githubUser.interface";
-import { catchError, map, of, throwError } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { GithubUser } from '../models/githubUser.interface';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
-  private BASE_URL = "https://api.github.com/users/";
+  private BASE_URL = 'https://api.github.com/users/';
 
   http: HttpClient = inject(HttpClient);
 
@@ -15,12 +15,12 @@ export class UserService {
     return this.http.get<GithubUser>(this.BASE_URL + username).pipe(
       map(this.mapToGithubUser),
       catchError((error) => {
-        console.error("Error fetching user", error);
+        console.error('Error fetching user', error);
         // return of(null);
         return throwError(() => {
-          new Error("Error fetching user");
+          new Error('Error fetching user');
         });
-      })
+      }),
     );
   }
 
